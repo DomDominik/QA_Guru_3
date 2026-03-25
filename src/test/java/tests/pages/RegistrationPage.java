@@ -2,6 +2,7 @@ package tests.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import tests.pages.components.CalendarComponent;
+import tests.pages.components.ModalResultComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -11,22 +12,24 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class RegistrationPage {
     CalendarComponent calendarComponent = new CalendarComponent();
+    ModalResultComponent modalResultComponent = new ModalResultComponent();
 
     //Elements
-    private SelenideElement firstNameInput = $("#firstName");
-    private SelenideElement lastNameInput = $("#lastName");
-    private SelenideElement userEmailInput = $("#userEmail");
-    private SelenideElement genterContainer = $("#genterWrapper");
-    private SelenideElement userNumberInput = $("#userNumber");
-    private SelenideElement subjectsInput = $("#subjectsInput");
-    private SelenideElement hobbiesRadioButton = $("#hobbiesWrapper");
-    private SelenideElement uploadPicture = $("#uploadPicture");
-    private SelenideElement currentAddressInput = $("#currentAddress");
-    private SelenideElement countrySelect = $("#react-select-3-input");
-    private SelenideElement citySelect = $("#react-select-4-input");
-    private SelenideElement submitButton = $("#submit");
-    private SelenideElement tableResponsive = $(".table-responsive");
-    private SelenideElement tablemModalResponsive = $("#example-modal-sizes-title-lg");
+    private final SelenideElement firstNameInput = $("#firstName");
+    private final SelenideElement lastNameInput = $("#lastName");
+    private final SelenideElement userEmailInput = $("#userEmail");
+    private final SelenideElement genterContainer = $("#genterWrapper");
+    private final SelenideElement userNumberInput = $("#userNumber");
+    private final SelenideElement subjectsInput = $("#subjectsInput");
+    private final SelenideElement hobbiesRadioButton = $("#hobbiesWrapper");
+    private final SelenideElement uploadPicture = $("#uploadPicture");
+    private final SelenideElement currentAddressInput = $("#currentAddress");
+    private final SelenideElement countrySelect = $("#react-select-3-input");
+    private final SelenideElement citySelect = $("#react-select-4-input");
+    private final SelenideElement submitButton = $("#submit");
+    private final SelenideElement tableResponsive = $(".table-responsive");
+    private final SelenideElement tableModalResponsive = $("#example-modal-sizes-title-lg");
+    private final SelenideElement dateOfBirthInput = $("#dateOfBirthInput");
 
 
     //Actions
@@ -61,7 +64,7 @@ public class RegistrationPage {
         return  this;
     }
     public RegistrationPage typeDateOfBirth (String month, String year, String day) {
-        $("#dateOfBirthInput").click();
+        dateOfBirthInput.click();
         calendarComponent.setDate(month, year, day);
         return  this;
     }
@@ -100,33 +103,42 @@ public class RegistrationPage {
 
         return this;
     }
-    public RegistrationPage checkTableResponsive (String label, String expectedValue) {
-        tableResponsive
-                .$(byText(label))
-                .parent()
-                .shouldHave(text(expectedValue));
+//    public RegistrationPage checkTableResponsive (String label, String expectedValue) {
+//        tableResponsive
+//                .$(byText(label))
+//                .parent()
+//                .shouldHave(text(expectedValue));
+//
+//        return this;
+//    }
+    public RegistrationPage checkFullTableResponsive () {
+        modalResultComponent.tableFullFieldResult();
 
         return this;
     }
-    public RegistrationPage checkEmptyTableResponsive (String label, String expectedValue) {
-        tableResponsive
-                .$(byText(label))
-                .parent()
-                .shouldBe();
+//    public RegistrationPage checkEmptyTableResponsive (String label) {
+//        tableResponsive
+//                .$(byText(label))
+//                .parent()
+//                .shouldBe();
+//
+//        return this;
+//    }
+    public RegistrationPage checkEmptyTableResponsive () {
+        modalResultComponent.tableRequiredFieldResult();
 
         return this;
     }
     public RegistrationPage checkVisibleTableResponsive () {
-        tablemModalResponsive
+        tableModalResponsive
                 .shouldBe(visible)
                 .shouldHave(text("Thanks for submitting the form"));
 
         return this;
     }
-    public RegistrationPage checkNotVisibleTableResponsive () {
-        tablemModalResponsive
+    public void checkNotVisibleTableResponsive () {
+        tableModalResponsive
                 .shouldNotBe(visible);
 
-        return this;
     }
 }
