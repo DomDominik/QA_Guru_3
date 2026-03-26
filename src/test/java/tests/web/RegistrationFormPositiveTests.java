@@ -29,7 +29,16 @@ public class RegistrationFormPositiveTests {
                 .submitForm()
 
                 .checkVisibleTableResponsive()
-                .checkEmptyTableResponsive();
+                .checkResult("Student Name", firstName+" "+lastName)
+                .checkEmptyResult("Student Email")
+                .checkResult("Gender", genterWrapper)
+                .checkResult("Mobile", userNumber)
+                .checkEmptyResult("Date of Birth")
+                .checkEmptyResult("Subjects")
+                .checkEmptyResult("Hobbies")
+                .checkEmptyResult("Picture")
+                .checkEmptyResult("Address")
+                .checkEmptyResult("State and City");
     }
     @Test
     void successFullFormTests() {
@@ -51,7 +60,16 @@ public class RegistrationFormPositiveTests {
                 .submitForm()
 
                 .checkVisibleTableResponsive()
-                .checkFullTableResponsive();
+                .checkResult("Student Name", firstName+" "+lastName)
+                .checkResult("Student Email", userEmail)
+                .checkResult("Gender", genterWrapper)
+                .checkResult("Mobile", userNumber)
+                .checkResult("Date of Birth", dayOfBirth+" "+monthOfBirth+","+yearOfBirth)
+                .checkResult("Subjects", subjects)
+                .checkResult("Hobbies", hobbiesSports+", "+hobbiesReading)
+                .checkResult("Picture", nameOfFile)
+                .checkResult("Address", currentAddress)
+                .checkResult("State and City", country+" "+city);
     }
     @AfterAll
     static void teaDown() {
