@@ -27,7 +27,6 @@ public class RegistrationPage {
     private final SelenideElement countrySelect = $("#react-select-3-input");
     private final SelenideElement citySelect = $("#react-select-4-input");
     private final SelenideElement submitButton = $("#submit");
-    private final SelenideElement tableResponsive = $(".table-responsive");
     private final SelenideElement tableModalResponsive = $("#example-modal-sizes-title-lg");
     private final SelenideElement dateOfBirthInput = $("#dateOfBirthInput");
 
@@ -103,32 +102,6 @@ public class RegistrationPage {
 
         return this;
     }
-//    public RegistrationPage checkTableResponsive (String label, String expectedValue) {
-//        tableResponsive
-//                .$(byText(label))
-//                .parent()
-//                .shouldHave(text(expectedValue));
-//
-//        return this;
-//    }
-    public RegistrationPage checkFullTableResponsive () {
-        modalResultComponent.tableFullFieldResult();
-
-        return this;
-    }
-//    public RegistrationPage checkEmptyTableResponsive (String label) {
-//        tableResponsive
-//                .$(byText(label))
-//                .parent()
-//                .shouldBe();
-//
-//        return this;
-//    }
-    public RegistrationPage checkEmptyTableResponsive () {
-        modalResultComponent.tableRequiredFieldResult();
-
-        return this;
-    }
     public RegistrationPage checkVisibleTableResponsive () {
         tableModalResponsive
                 .shouldBe(visible)
@@ -140,5 +113,15 @@ public class RegistrationPage {
         tableModalResponsive
                 .shouldNotBe(visible);
 
+    }
+    public RegistrationPage checkResult (String label, String expectedValue) {
+        modalResultComponent.checkTableResponsive(label, expectedValue);
+
+        return this;
+    }
+    public RegistrationPage checkEmptyResult (String label) {
+        modalResultComponent.checkEmptyTableResponsive(label);
+
+        return this;
     }
 }
